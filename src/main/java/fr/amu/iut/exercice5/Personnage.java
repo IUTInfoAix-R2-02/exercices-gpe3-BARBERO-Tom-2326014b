@@ -4,7 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-class Personnage extends Group {
+abstract class Personnage extends Group {
     protected final static double LARGEUR_MOITIE_PERSONNAGE = 10;
     protected final static double LARGEUR_PERSONNAGE = LARGEUR_MOITIE_PERSONNAGE * 2;
     private final Circle corps;
@@ -54,6 +54,15 @@ class Personnage extends Group {
         //  *   |   *
         //   *  |  *
         //    *****
+        //déplacement ---->
+        if (getLayoutY() < hauteurJeu - LARGEUR_PERSONNAGE) {
+            setLayoutY(getLayoutY() + LARGEUR_PERSONNAGE);
+        }
+        if (!direction.equals("bas")) {
+            direction = "bas";
+        }
+
+
 
     }
 
@@ -63,6 +72,14 @@ class Personnage extends Group {
         //  *   |   *
         //   *     *
         //    *****
+        //déplacement ---->
+        if (getLayoutY() >= LARGEUR_PERSONNAGE) {
+            setLayoutY(getLayoutY() - LARGEUR_PERSONNAGE);
+        }
+        if (!direction.equals("haut")) {
+            direction = "haut";
+        }
+
 
     }
 
@@ -70,5 +87,11 @@ class Personnage extends Group {
         return getBoundsInParent().contains(autrePersonnage.getBoundsInParent())
                 || autrePersonnage.getBoundsInParent().contains(getBoundsInParent());
     }
+
+    boolean estEnCollisionObstacle(Obstacles obs) {
+        return getBoundsInParent().contains(obs.getBoundsInParent())
+                || obs.getBoundsInParent().contains(getBoundsInParent());
+    }
+
 
 }
