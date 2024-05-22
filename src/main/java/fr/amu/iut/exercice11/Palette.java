@@ -1,11 +1,14 @@
-package fr.amu.iut.exercice1;
+package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,6 +36,11 @@ public class Palette extends Application {
 
     private Label texteDuBas;
 
+    IntegerProperty nbFois = new SimpleIntegerProperty();
+    StringProperty nomDuBouton = new SimpleStringProperty();
+
+    StringProperty couleurDuPanneau = new SimpleStringProperty("#FFFFFF");
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -57,9 +65,43 @@ public class Palette extends Application {
         rouge = new Button("Rouge");
         bleu = new Button("Bleu");
 
+
+        nbFois.setValue(0);
+
+
+
         /* VOTRE CODE ICI */
 
         boutons.getChildren().addAll(vert, rouge, bleu);
+
+        vert.addEventHandler(MouseEvent.MOUSE_CLICKED, actionEvent -> {
+            nbVert+=1;
+            nbFois.setValue(nbVert);
+            nomDuBouton.setValue("Vert");
+            couleurDuPanneau.setValue("green");
+
+        });
+        rouge.addEventHandler(MouseEvent.MOUSE_CLICKED, actionEvent -> {
+            nbRouge+=1;
+            nbFois.setValue(nbRouge);
+            nomDuBouton.setValue("Rouge");
+            couleurDuPanneau.setValue("red");
+
+        });
+        bleu.addEventHandler(MouseEvent.MOUSE_CLICKED, actionEvent -> {
+            nbBleu+=1;
+            nbFois.setValue(nbBleu);
+            nomDuBouton.setValue("Bleu");
+            couleurDuPanneau.setValue("blue");
+
+        });
+
+
+
+
+        texteDuHaut.textProperty().bind(Bindings.concat (nomDuBouton," choisi ",nbFois," fois"));
+        panneau.styleProperty().bind(Bindings.concat("-fx-background-color:", couleurDuPanneau));texteDuHaut.textProperty().bind(Bindings.concat (nomDuBouton," choisi ",nbFois," fois"));
+        panneau.styleProperty().bind(Bindings.concat("-fx-background-color:", couleurDuPanneau));
 
         root.setCenter(panneau);
         root.setTop(texteDuHaut);
@@ -70,5 +112,13 @@ public class Palette extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-}
+    private void createBindings(){
+        BooleanProperty pasEncoreDeClic = new SimpleBooleanProperty();
+        pasEncoreDeClic.setValue(false);
+        pasEncoreDeClic.bind(Bindings.equal(nbFois,0));
 
+
+
+
+    }
+}

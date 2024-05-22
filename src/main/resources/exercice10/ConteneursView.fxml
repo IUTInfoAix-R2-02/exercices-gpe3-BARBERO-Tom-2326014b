@@ -1,69 +1,73 @@
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Label?>
-<BorderPane >
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <MenuBar>
             <Menu text="File">
-                <MenuItem text="New"></MenuItem>
-                <MenuItem text="Open"></MenuItem>
-                <MenuItem text="Save"></MenuItem>
-                <MenuItem text="Close"></MenuItem>
+                <MenuItem text="New" />
+                <MenuItem text="Open" />
+                <MenuItem text="Save" />
+                <MenuItem text="Close" />
             </Menu>
             <Menu text="Edit">
-                <MenuItem text="Cut"></MenuItem>
-                <MenuItem text="Copy"></MenuItem>
-                <MenuItem text="Paste"></MenuItem>
+                <MenuItem text="Cut" />
+                <MenuItem text="Copy" />
+                <MenuItem text="Paste" />
             </Menu>
-            <Menu text="Help"></Menu>
+            <Menu text="Help" />
         </MenuBar>
     </top>
     <left>
         <HBox>
     <VBox id="v1" alignment="CENTER" spacing="15">
-        <Text id="but" text="Boutons :"></Text>
-        <Button id="b1" text="Bouton1"></Button>
-        <Button id="b2" text="Bouton2"></Button>
-        <Button id="b3" text="Bouton3"></Button>
+        <Text id="but" text="Boutons :" />
+        <Button id="b1" prefHeight="23.0" prefWidth="73.0" text="Bouton1" />
+        <Button id="b2" text="Bouton2" />
+        <Button id="b3" text="Bouton3" />
 
     </VBox>
-            <Separator orientation="VERTICAL"></Separator>
+            <Separator orientation="VERTICAL" />
         </HBox>
 
     </left>
 
     <center>
         <VBox alignment="CENTER">
-        <GridPane vgap="10" hgap="10" alignment="CENTER">
-            <Text text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0"></Text>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"></TextField>
-            <Text text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1"></Text>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"></TextField>
-            <Text text="Password" GridPane.columnIndex="0" GridPane.rowIndex="2"></Text>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"></TextField>
+        <GridPane alignment="CENTER" hgap="10" vgap="10">
+            <Text text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Text text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text text="Password" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" spacing="15" >
-            <Button text="Submit"></Button>
-            <Button text="Cancel"></Button>
+        <HBox alignment="CENTER" spacing="15" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button text="Submit" />
+            <Button text="Cancel" />
         </HBox>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
         </GridPane>
         </VBox>
 
 
     </center>
     <bottom>
-        <VBox alignment="CENTER" >
-            <Separator orientation="HORIZONTAL"></Separator>
-            <Label text="Ceci est un label de page" alignment="CENTER"></Label>
+        <VBox alignment="CENTER">
+            <Separator orientation="HORIZONTAL" />
+            <Label alignment="CENTER" text="Ceci est un label de page" />
         </VBox>
     </bottom>
 </BorderPane>
