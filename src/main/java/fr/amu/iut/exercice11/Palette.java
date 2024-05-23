@@ -2,6 +2,7 @@ package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -49,7 +50,6 @@ public class Palette extends Application {
         texteDuHaut = new Label();
         texteDuHaut.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         BorderPane.setAlignment(texteDuHaut, Pos.CENTER);
-
         panneau = new Pane();
         panneau.setPrefSize(400, 200);
 
@@ -99,14 +99,13 @@ public class Palette extends Application {
 
 
 
-        texteDuHaut.textProperty().bind(Bindings.concat (nomDuBouton," choisi ",nbFois," fois"));
-        panneau.styleProperty().bind(Bindings.concat("-fx-background-color:", couleurDuPanneau));texteDuHaut.textProperty().bind(Bindings.concat (nomDuBouton," choisi ",nbFois," fois"));
-        panneau.styleProperty().bind(Bindings.concat("-fx-background-color:", couleurDuPanneau));
+        //texteDuHaut.textProperty().bind(Bindings.concat (nomDuBouton," choisi ",nbFois," fois"));
+
 
         root.setCenter(panneau);
         root.setTop(texteDuHaut);
         root.setBottom(bas);
-
+        createBindings();
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
@@ -114,11 +113,14 @@ public class Palette extends Application {
     }
     private void createBindings(){
         BooleanProperty pasEncoreDeClic = new SimpleBooleanProperty();
-        pasEncoreDeClic.setValue(false);
-        pasEncoreDeClic.bind(Bindings.equal(nbFois,0));
+        pasEncoreDeClic.bind(nbFois.isEqualTo(0));
+        //pasEncoreDeClic.bind(Bindings.
+        texteDuHaut.textProperty().bind(Bindings.when(pasEncoreDeClic).then(Bindings.concat("Cliquez sur un bouton ")).otherwise(Bindings.concat(nomDuBouton," choisi ",nbFois," fois")));
+        panneau.styleProperty().bind(Bindings.concat("-fx-background-color:", couleurDuPanneau));
 
-
-
-
+        texteDuBas.textProperty().bind(Bindings.when(pasEncoreDeClic).then(Bindings.concat("")).otherwise(Bindings.concat("Le ",nomDuBouton," est une jolie couleur ! ")));
+        texteDuBas.styleProperty().bind(Bindings.when(pasEncoreDeClic).then(Bindings.concat("-fx-text-fill:white")).otherwise(Bindings.concat("-fx-text-fill:",couleurDuPanneau)));
     }
+
+
 }
